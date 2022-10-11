@@ -6,7 +6,7 @@ on:
     
 env:
   NAME: qudtns1223
-  REPO: jeju-road-back-end
+  REPO: daily-map-back-end
   
 jobs: 
   build:
