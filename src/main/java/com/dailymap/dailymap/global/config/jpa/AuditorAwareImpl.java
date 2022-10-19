@@ -18,7 +18,7 @@ public class AuditorAwareImpl implements AuditorAware<String> {
     public Optional<String> getCurrentAuditor() {
         String modifiedBy = httpServletRequest.getRequestURI();
 
-        if (StringUtils.hasText(modifiedBy)) {
+        if (!StringUtils.hasText(modifiedBy)) {
             modifiedBy = "Unknown";
         }
 
