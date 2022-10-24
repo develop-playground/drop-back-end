@@ -35,7 +35,7 @@ public class TokenManager {
         Date refreshTokenExpireTime = createTokenExpireTime(refreshTokenExpiredTime);
 
         String accessToken = createToken(email, TokenType.ACCESS ,accessTokenExpireTime);
-        String refreshToken = createToken(email, TokenType.REFRESH, accessTokenExpireTime);
+        String refreshToken = createToken(email, TokenType.REFRESH, refreshTokenExpireTime);
 
         GrantType grantType = GrantType.BEARER;
 
