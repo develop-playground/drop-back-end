@@ -1,9 +1,53 @@
+spring:
+  profiles:
+    group:
+      dev:
+        - dev
+        - common
+      prod:
+        - prod
+        - common
+      test:
+        - test
+        - common
+
+---
 server:
   port: 8080
   servlet:
     context-path: /
 
 spring:
+  config:
+    activate:
+      on-profile: common
+  application:
+    name: DROP
+  jpa:
+    properties:
+      hibernate:
+        default_batch_fetch_size: 1000
+        format_sql: true
+        show_sql: true
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+
+# client id 및 secret, token secret은 추후 jasypt나 AWS Secret Manager로 보안설정 예정
+kakao:
+  client:
+    id: 661685b0f0b7c48454e26b4cd57f2db1
+    secret: 3EbfiGsb9bam4fx3LhLKlDnSuM8PZ7Zx
+
+token:
+  secret: dev-playground-drop
+  access-token-expired-time: 15 * 60 * 1000
+  refresh-token-expired-time: 14 *24 * 60 * 60 * 1000
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
 
   datasource:
     url: jdbc:h2:mem:test
@@ -15,16 +59,41 @@ spring:
     hibernate:
       ddl-auto: create
 
-    properties:
-      hibernate:
-        format_sql: true # sql 예쁘게 출력
-        default_batch_fetch_size: 1000
-        show-sql: true
+logging:
+  level:
+    org.hibernate.type: trace
 
-  jackson:
-    property-naming-strategy: SNAKE_CASE
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
 
-  logging:
-    level:
-      org.hibernate.type: trace # sql binding 값 출력
+# 추후 실제 배포환경으로 변경예정
+  datasource:
+    url: jdbc:h2:mem:test
+    username: root
+    password: 1234
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+logging:
+  level:
+    org.hibernate.type: info
+
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+
+  datasource:
+    url: jdbc:h2:mem:test
+    username: root
+    password: 1234
+    driver-class-name: org.h2.Driver
+
 
