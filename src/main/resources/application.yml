@@ -28,3 +28,7 @@ spring:
     level:
       org.hibernate.type: trace # sql binding 값 출력
 
+token:
+  secret: dev-playground-drop
+  access-token-expired-time: 15 * 60 * 1000
+  refresh-token-expired-time: 14 *24 * 60 * 60 * 1000
