@@ -1,5 +1,6 @@
 package com.dailymap.dailymap.domain.jwt.service;
 
+import com.dailymap.dailymap.domain.jwt.constant.GrantType;
 import com.dailymap.dailymap.domain.jwt.constant.TokenType;
 import com.dailymap.dailymap.domain.jwt.dto.TokenDto;
 import com.dailymap.dailymap.global.error.exception.ErrorCode;
@@ -30,8 +31,21 @@ public class TokenManager {
     private String tokenSecret;
 
     public TokenDto createTokenDto(String email) {
+        Date accessTokenExpireTime = createTokenExpireTime(accessTokenExpiredTime);
+        Date refreshTokenExpireTime = createTokenExpireTime(refreshTokenExpiredTime);
 
-        return null;
+        String accessToken = createToken(email, TokenType.ACCESS ,accessTokenExpireTime);
+        String refreshToken = createToken(email, TokenType.REFRESH, accessTokenExpireTime);
+
+        GrantType grantType = GrantType.BEARER;
+
+        return TokenDto.builder()
+            .grantType(grantType.getType())
+            .accessToken(accessToken)
+            .accessTokenExpireTime(accessTokenExpireTime)
+            .refreshToken(refreshToken)
+            .refreshTokenExpireTime(refreshTokenExpireTime)
+            .build();
     }
 
     private Date createTokenExpireTime(String tokenExpireTime) {
@@ -53,7 +67,7 @@ public class TokenManager {
         String email;
 
         try {
-            Claims claims = getClaims(accessToken);
+            Claims claims = getTokenClaims(accessToken);
             email = claims.getAudience();
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,7 +78,7 @@ public class TokenManager {
 
     public boolean validateToken(String token) {
         try {
-            getClaims(token);
+            getTokenClaims(token);
             return true;
         } catch (JwtException e) {
             log.info("잘못된 JWT");
@@ -75,20 +89,16 @@ public class TokenManager {
         return false;
     }
 
-    public Claims getTokenClaims(String token) {
+    private Claims getTokenClaims(String token) {
         Claims claims;
         try {
-            claims = getClaims(token);
+            claims = Jwts.parser().setSigningKey(tokenSecret)
+                .parseClaimsJws(token).getBody();
         } catch (Exception e) {
             e.printStackTrace();
             throw new NotValidTokenException(NOT_VALID_TOKEN);
         }
         return claims;
-    }
-
-    private Claims getClaims(String token) {
-        return Jwts.parser().setSigningKey(tokenSecret)
-            .parseClaimsJws(token).getBody();
     }
 
     public boolean isTokenExpired(Date tokenExpireTime) {
