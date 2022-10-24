@@ -1,4 +1,4 @@
-name: jeju-road-api
+name: drop-api
 
 on: 
   push:
@@ -39,15 +39,12 @@ jobs:
         push: true
         tags: ${{env.NAME}}/${{env.REPO}}:latest
 
-# AWS 서버 설정 전까지 배포부분 주석처리
-
-#  deploy:
-#    needs: build
-#    name: Deploy
-#    runs-on: [ self-hosted, label-deploy ] 
-#    steps:
+  deploy:
+    needs: build
+    name: Deploy
+    runs-on: [ self-hosted, label-deploy ] 
+    steps:
     
-#      - name: deploy run 
-#        run: |
-#          sh /dodo/devpg/run.sh # 서버 설정 경로에 맞게 다시 셋팅
-
+      - name: deploy run 
+        run: |
+          sh /home/ubuntu/run.sh 
