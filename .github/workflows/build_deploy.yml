@@ -1,4 +1,4 @@
-name: jeju-road-api
+name: drop-api
 
 on: 
   push:
