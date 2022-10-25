@@ -13,7 +13,7 @@ spring:
 
 ---
 server:
-  port: 8080
+  port: 80
   servlet:
     context-path: /
 
@@ -41,7 +41,7 @@ kakao:
 token:
   secret: dev-playground-drop
   access-token-expired-time: 900000 # 15 * 60 * 1000
-  refresh-token-expired-time: 1210500000 # 4 * 24 * 60 *1 60 * 1000
+  refresh-token-expired-time: 1209600000 # 14 * 24 * 60 * 60 * 1000
 
 ---
 spring:
