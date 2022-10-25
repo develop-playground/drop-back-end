@@ -40,8 +40,8 @@ kakao:
 
 token:
   secret: dev-playground-drop
-  access-token-expired-time: 15 * 60 * 1000
-  refresh-token-expired-time: 14 *24 * 60 * 60 * 1000
+  access-token-expired-time: 900000 # 15 * 60 * 1000
+  refresh-token-expired-time: 1210500000 # 4 * 24 * 60 *1 60 * 1000
 
 ---
 spring:
@@ -69,12 +69,12 @@ spring:
     activate:
       on-profile: prod
 
-# 추후 실제 배포환경으로 변경예정
+# DB 계정정보 및 패스워드 정보 암호화 보안설정 예정
   datasource:
-    url: jdbc:h2:mem:test
-    username: root
-    password: 1234
-    driver-class-name: org.h2.Driver
+    url: jdbc:mysql://daily-map-database.c2yszpxq2xbo.ap-northeast-2.rds.amazonaws.com:3306/devdrop?characterEncoding=UTF-8&useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
+    username: admin
+    password: "##playground123"
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:
