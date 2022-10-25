@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 80
   servlet:
     context-path: /
 
@@ -28,3 +28,7 @@ spring:
     level:
       org.hibernate.type: trace # sql binding 값 출력
 
+kakao:
+  client:
+    id: 661685b0f0b7c48454e26b4cd57f2db1
+    secret: 3EbfiGsb9bam4fx3LhLKlDnSuM8PZ7Zx
