@@ -12,8 +12,15 @@ public class KakaoLoginService {
 
     private final KakaoTokenFeignClient kakaoTokenFeignClient;
 
-    public KakaoTokenResponseDto getKakaoTokenDto(String code, String clientId, String clientSecret) {
-        KakaoTokenRequestDto kakaoTokenRequestDto = KakaoTokenRequestDto.of(code, clientId, clientSecret);
+    public KakaoTokenResponseDto getKakaoTokenDto(String code, String clientId,
+                                                  String clientSecret, String redirectUri) {
+        KakaoTokenRequestDto kakaoTokenRequestDto = KakaoTokenRequestDto.of(
+            code,
+            clientId,
+            clientSecret,
+            redirectUri
+        );
+
         return kakaoTokenFeignClient.getKakaoToken(kakaoTokenRequestDto);
     }
 

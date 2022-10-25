@@ -32,3 +32,4 @@ kakao:
   client:
     id: 661685b0f0b7c48454e26b4cd57f2db1
     secret: 3EbfiGsb9bam4fx3LhLKlDnSuM8PZ7Zx
+    redirect-uri: http://localhost/api/auth/kakao/callback

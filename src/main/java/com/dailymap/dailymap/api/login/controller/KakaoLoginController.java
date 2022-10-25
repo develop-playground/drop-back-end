@@ -22,10 +22,18 @@ public class KakaoLoginController {
     @Value("${kakao.client.secret}")
     private String clientSecret;
 
+    @Value("${kakao.client.redirect-uri}")
+    private String redirectUri;
 
     @GetMapping("/kakao/callback")
     public ResponseEntity<KakaoTokenResponseDto> loginCallback(String code) {
-        KakaoTokenResponseDto kakaoToken = kakaoLoginService.getKakaoTokenDto(code, clientId, clientSecret);
+        KakaoTokenResponseDto kakaoToken = kakaoLoginService.getKakaoTokenDto(
+            code,
+            clientId,
+            clientSecret,
+            redirectUri
+        );
+
         return ResponseEntity.ok(kakaoToken);
     }
 
