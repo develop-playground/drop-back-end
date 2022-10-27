@@ -13,7 +13,7 @@ import java.util.Date;
 
 import static com.dailymap.dailymap.domain.jwt.constant.GrantType.BEARER;
 
-//@ActiveProfiles("")
+@ActiveProfiles("test")
 public class TokenManagerTests extends DailymapApplicationTests {
 
     @Autowired
