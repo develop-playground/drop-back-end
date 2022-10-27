@@ -2,7 +2,6 @@ package com.dailymap.dailymap.api.login.dto;
 
 import lombok.Builder;
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Value;
 
 @Getter
 @Builder
@@ -18,8 +17,7 @@ public class KakaoTokenRequestDto {
 
     private String client_secret;
 
-    public static KakaoTokenRequestDto of(String code, String clientId,
-                                          String clientSecret, String redirectUri) {
+    public static KakaoTokenRequestDto of(String code, String clientId, String clientSecret, String redirectUri) {
         return KakaoTokenRequestDto.builder()
             .grant_type("authorization_code")
             .client_id(clientId)
