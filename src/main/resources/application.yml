@@ -32,17 +32,6 @@ spring:
   jackson:
     property-naming-strategy: SNAKE_CASE
 
-# client id 및 secret, token secret은 추후 jasypt나 AWS Secret Manager로 보안설정 예정
-kakao:
-  client:
-    id: 661685b0f0b7c48454e26b4cd57f2db1
-    secret: 3EbfiGsb9bam4fx3LhLKlDnSuM8PZ7Zx
-
-token:
-  secret: dev-playground-drop
-  access-token-expired-time: 900000 # 15 * 60 * 1000
-  refresh-token-expired-time: 1209600000 # 14 * 24 * 60 * 60 * 1000
-
 ---
 spring:
   config:
@@ -62,6 +51,18 @@ spring:
 logging:
   level:
     org.hibernate.type: trace
+
+# client id 및 secret, token secret은 추후 jasypt나 AWS Secret Manager로 보안설정 예정
+kakao:
+  client:
+    id: 661685b0f0b7c48454e26b4cd57f2db1
+    secret: 3EbfiGsb9bam4fx3LhLKlDnSuM8PZ7Zx
+    redirect-uri: http://localhost/api/auth/kakao/callback
+
+token:
+  secret: dev-playground-drop
+  access-token-expired-time: 900000 # 15 * 60 * 1000
+  refresh-token-expired-time: 1210500000 # 4 * 24 * 60 *1 60 * 1000
 
 ---
 spring:
@@ -84,6 +85,18 @@ logging:
   level:
     org.hibernate.type: info
 
+# client id 및 secret, token secret은 추후 jasypt나 AWS Secret Manager로 보안설정 예정
+kakao:
+  client:
+    id: 661685b0f0b7c48454e26b4cd57f2db1
+    secret: 3EbfiGsb9bam4fx3LhLKlDnSuM8PZ7Zx
+    redirect-uri: http://3.34.194.171/api/auth/kakao/callback
+
+token:
+  secret: dev-playground-drop
+  access-token-expired-time: 900000 # 15 * 60 * 1000
+  refresh-token-expired-time: 1210500000 # 4 * 24 * 60 *1 60 * 1000
+
 ---
 spring:
   config:
@@ -96,6 +109,12 @@ spring:
     password: 1234
     driver-class-name: org.h2.Driver
 
+# client id 및 secret, token secret은 추후 jasypt나 AWS Secret Manager로 보안설정 예정
+kakao:
+  client:
+    id: 661685b0f0b7c48454e26b4cd57f2db1
+    secret: 3EbfiGsb9bam4fx3LhLKlDnSuM8PZ7Zx
+    redirect-uri: http://localhost/api/auth/kakao/callback
 
 token:
   secret: dev-playground-drop
