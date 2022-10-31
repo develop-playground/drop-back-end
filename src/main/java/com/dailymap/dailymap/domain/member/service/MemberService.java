@@ -29,4 +29,7 @@ public class MemberService {
         return memberRepository.findByEmail(email);
     }
 
+    public Optional<Member> findMemberByRefreshToken(String refreshToken) {
+        return memberRepository.findByRefreshToken(refreshToken);
+    }
 }
