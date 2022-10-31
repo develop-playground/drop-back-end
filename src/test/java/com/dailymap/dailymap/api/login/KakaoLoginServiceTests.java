@@ -1,8 +1,11 @@
 package com.dailymap.dailymap.api.login;
 
 import com.dailymap.dailymap.api.login.client.KakaoTokenFeignClient;
+import com.dailymap.dailymap.api.login.client.LoginFeignClient;
 import com.dailymap.dailymap.api.login.dto.KakaoTokenRequestDto;
 import com.dailymap.dailymap.api.login.service.KakaoLoginService;
+import com.dailymap.dailymap.domain.jwt.service.TokenManager;
+import com.dailymap.dailymap.domain.member.service.MemberService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,13 +19,27 @@ import static org.mockito.Mockito.*;
 public class KakaoLoginServiceTests {
 
     @Mock
-    KakaoTokenFeignClient feignClient;
+    KakaoTokenFeignClient kakaoTokenFeignClient;
+
+    @Mock
+    LoginFeignClient loginFeignClient;
+
+    @Mock
+    TokenManager tokenManager;
+
+    @Mock
+    MemberService memberService;
 
     @Test
     @DisplayName("FeignClient를 이용한 카카오 API 호출 검증")
     public void kakaoAPICallVerificationTest() {
         // Arrange
-        KakaoLoginService sut = new KakaoLoginService(feignClient);
+        KakaoLoginService sut = new KakaoLoginService(
+            kakaoTokenFeignClient,
+            loginFeignClient,
+            tokenManager,
+            memberService
+        );
 
         // Act
         sut.getKakaoTokenDto(
@@ -33,7 +50,8 @@ public class KakaoLoginServiceTests {
         );
 
         // Assert
-        verify(feignClient, times(1)).getKakaoToken(any(KakaoTokenRequestDto.class));
+        verify(kakaoTokenFeignClient, times(1))
+            .getKakaoToken(any(KakaoTokenRequestDto.class));
     }
 
 }

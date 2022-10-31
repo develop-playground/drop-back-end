@@ -34,8 +34,20 @@ public class Member extends BaseEntity {
     @Column(length = 250)
     private LocalDateTime tokenExpirationTime;
 
+    public static Member of(String email, String name, MemberType memberType) {
+        return Member.builder()
+            .email(email)
+            .username(name)
+            .memberType(memberType)
+            .build();
+    }
+
     public void updateUsername(String username) {
         this.username = username;
     }
 
+    public void updateRefreshInfo(String refreshToken, LocalDateTime refreshTokenExpireTime) {
+        this.refreshToken = refreshToken;
+        this.tokenExpirationTime = refreshTokenExpireTime;
+    }
 }
