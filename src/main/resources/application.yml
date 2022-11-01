@@ -120,4 +120,3 @@ token:
   secret: dev-playground-drop
   access-token-expired-time: 900000 # 15 * 60 * 1000
   refresh-token-expired-time: 1210500000 # 4 * 24 * 60 *1 60 * 1000
-
