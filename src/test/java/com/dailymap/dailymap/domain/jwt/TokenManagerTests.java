@@ -7,12 +7,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Date;
 
 import static com.dailymap.dailymap.domain.jwt.constant.GrantType.BEARER;
 
-
+@ActiveProfiles("test")
 public class TokenManagerTests extends DailymapApplicationTests {
 
     @Autowired
