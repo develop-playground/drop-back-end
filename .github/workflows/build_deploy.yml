@@ -3,6 +3,8 @@ name: drop-api
 on: 
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
     
 env:
   NAME: qudtns1223
