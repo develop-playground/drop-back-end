@@ -5,7 +5,6 @@ import com.dailymap.dailymap.api.login.dto.LoginRequestDto;
 import com.dailymap.dailymap.api.login.service.KakaoLoginService;
 import com.dailymap.dailymap.domain.jwt.dto.TokenDto;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +38,10 @@ public class KakaoLoginController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<TokenDto> login(@RequestHeader("Authorization") String authorization, @RequestBody LoginRequestDto loginRequestDto) {
+    public ResponseEntity<TokenDto> login(
+        @RequestHeader("Authorization") String authorization,
+        @RequestBody LoginRequestDto loginRequestDto
+    ) {
         TokenDto tokenDto = kakaoLoginService.login(authorization, loginRequestDto);
 
         return ResponseEntity.ok(tokenDto);

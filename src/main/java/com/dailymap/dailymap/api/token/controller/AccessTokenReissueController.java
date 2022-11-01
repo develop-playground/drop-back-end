@@ -18,7 +18,6 @@ public class AccessTokenReissueController {
     @PostMapping("/token/reissue")
     public AccessTokenResponseDto accessTokenReissue(@RequestHeader("Authorization")String authorization) {
         AccessTokenResponseDto responseDto = accessTokenReissueService.getAccessTokenResponseDto(authorization);
-
         return responseDto;
     }
 

@@ -54,4 +54,14 @@ public class KakaoLoginServiceTests {
             .getKakaoToken(any(KakaoTokenRequestDto.class));
     }
 
+    @Test
+    @DisplayName("카카오 유저정보를 이용한 로그인 및 회원가 검증")
+    public void loginUsingKakaoUserInfoTest() { // 추후 작성
+        // Arrange
+
+        // Act
+
+        // Assert
+    }
+
 }

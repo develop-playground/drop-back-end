@@ -41,7 +41,11 @@ public class KakaoLoginService {
     private final MemberService memberService;
 
     public KakaoTokenResponseDto getKakaoTokenDto(
-        String code, String clientId, String clientSecret, String redirectUri) {
+        String code,
+        String clientId,
+        String clientSecret,
+        String redirectUri
+    ) {
         KakaoTokenRequestDto kakaoTokenRequestDto = KakaoTokenRequestDto.of(
             code,
             clientId,
