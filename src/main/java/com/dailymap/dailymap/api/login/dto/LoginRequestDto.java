@@ -10,6 +10,6 @@ import lombok.*;
 @Builder
 public class LoginRequestDto {
 
-    private MemberType memberType;
+	private MemberType memberType;
 
 }

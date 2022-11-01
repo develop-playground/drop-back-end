@@ -32,72 +32,72 @@ import static com.dailymap.dailymap.global.error.exception.ErrorCode.MEMBER_NOT_
 @Transactional(readOnly = true)
 public class KakaoLoginService {
 
-    private final KakaoTokenFeignClient kakaoTokenFeignClient;
+	private final KakaoTokenFeignClient kakaoTokenFeignClient;
 
-    private final LoginFeignClient loginFeignClient;
+	private final LoginFeignClient loginFeignClient;
 
-    private final TokenManager tokenManager;
+	private final TokenManager tokenManager;
 
-    private final MemberService memberService;
+	private final MemberService memberService;
 
-    public KakaoTokenResponseDto getKakaoTokenDto(
-        String code,
-        String clientId,
-        String clientSecret,
-        String redirectUri
-    ) {
-        KakaoTokenRequestDto kakaoTokenRequestDto = KakaoTokenRequestDto.of(
-            code,
-            clientId,
-            clientSecret,
-            redirectUri
-        );
+	public KakaoTokenResponseDto getKakaoTokenDto(
+		String code,
+		String clientId,
+		String clientSecret,
+		String redirectUri
+	) {
+		KakaoTokenRequestDto kakaoTokenRequestDto = KakaoTokenRequestDto.of(
+			code,
+			clientId,
+			clientSecret,
+			redirectUri
+		);
 
-        return kakaoTokenFeignClient.getKakaoToken(kakaoTokenRequestDto);
-    }
+		return kakaoTokenFeignClient.getKakaoToken(kakaoTokenRequestDto);
+	}
 
-    @Transactional
-    public TokenDto login(String authorization, LoginRequestDto loginRequestDto) throws BusinessException{
-        MemberType memberType = loginRequestDto.getMemberType();
-        if (!KAKAO.equals(memberType)) {
-            throw new BusinessException(INVALID_MEMBER_TYPE);
-        }
+	@Transactional
+	public TokenDto login(String authorization, LoginRequestDto loginRequestDto) throws BusinessException {
+		MemberType memberType = loginRequestDto.getMemberType();
+		if (!KAKAO.equals(memberType)) {
+			throw new BusinessException(INVALID_MEMBER_TYPE);
+		}
 
-        KakaoUserInfo userInfo = loginFeignClient.getKakaoUserInfo(authorization);
-        String email = userInfo.getKakaoAccount().getEmail();
-        String username = userInfo.getProperties().get("nickname");
+		KakaoUserInfo userInfo = loginFeignClient.getKakaoUserInfo(authorization);
+		String email = userInfo.getKakaoAccount().getEmail();
+		String username = userInfo.getProperties().get("nickname");
 
-        Optional<Member> findMember = memberService.findMemberByEmail(email);
-        if (findMember.isPresent()) {
-            return updateRefreshInfo(findMember.orElseThrow(() -> new BusinessException(MEMBER_NOT_EXISTS)));
-        }
+		Optional<Member> findMember = memberService.findMemberByEmail(email);
+		if (findMember.isPresent()) {
+			return updateRefreshInfo(findMember.orElseThrow(() -> new BusinessException(MEMBER_NOT_EXISTS)));
+		}
 
-        return register(email, username, memberType);
-    }
+		return register(email, username, memberType);
+	}
 
-    private TokenDto register(String email, String name, MemberType memberType) {
-        Member member = Member.of(email, name, memberType);
-        TokenDto tokenDto = tokenManager.createTokenDto(email);
+	private TokenDto register(String email, String name, MemberType memberType) {
+		Member member = Member.of(email, name, memberType);
+		TokenDto tokenDto = tokenManager.createTokenDto(email);
 
-        updateMemberRefreshToken(member, tokenDto);
-        memberService.register(member);
+		updateMemberRefreshToken(member, tokenDto);
+		memberService.register(member);
 
-        return tokenDto;
-    }
+		return tokenDto;
+	}
 
-    private TokenDto updateRefreshInfo(Member member) {
-        TokenDto tokenDto = tokenManager.createTokenDto(member.getEmail());
-        updateMemberRefreshToken(member, tokenDto);
+	private TokenDto updateRefreshInfo(Member member) {
+		TokenDto tokenDto = tokenManager.createTokenDto(member.getEmail());
+		updateMemberRefreshToken(member, tokenDto);
 
-        return tokenDto;
-    }
+		return tokenDto;
+	}
 
-    private void updateMemberRefreshToken(Member member, TokenDto tokenDto) {
-        String refreshToken = tokenDto.getRefreshToken();
-        Date expireTime = tokenDto.getRefreshTokenExpireTime();
-        LocalDateTime refreshTokenExpireTime = DateTimeUtils.convertToLocalDateTime(expireTime);
+	private void updateMemberRefreshToken(Member member, TokenDto tokenDto) {
+		String refreshToken = tokenDto.getRefreshToken();
+		Date expireTime = tokenDto.getRefreshTokenExpireTime();
+		LocalDateTime refreshTokenExpireTime = DateTimeUtils.convertToLocalDateTime(expireTime);
 
-        member.updateRefreshInfo(refreshToken, refreshTokenExpireTime);
-    }
+		member.updateRefreshInfo(refreshToken, refreshTokenExpireTime);
+	}
 
 }

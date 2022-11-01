@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 public class HealthCheckService {
 
 
-    public HealthCheckResponseDto createResponse() {
-        return HealthCheckResponseDto.builder()
-            .status(true)
-            .health("ok")
-            .build();
-    }
+	public HealthCheckResponseDto createResponse() {
+		return HealthCheckResponseDto.builder()
+			.status(true)
+			.health("ok")
+			.build();
+	}
 }

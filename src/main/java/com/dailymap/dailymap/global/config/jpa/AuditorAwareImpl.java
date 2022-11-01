@@ -8,16 +8,16 @@ import java.util.Optional;
 
 public class AuditorAwareImpl implements AuditorAware<String> {
 
-    @NonNull
-    @Override
-    public Optional<String> getCurrentAuditor() {
-        // todo: 어떤 값을 넣을지 결정
-        String modifiedBy = "";
+	@NonNull
+	@Override
+	public Optional<String> getCurrentAuditor() {
+		// todo: 어떤 값을 넣을지 결정
+		String modifiedBy = "";
 
-        if (!StringUtils.hasText(modifiedBy)) {
-            modifiedBy = "SERVER";
-        }
+		if (!StringUtils.hasText(modifiedBy)) {
+			modifiedBy = "SERVER";
+		}
 
-        return Optional.of(modifiedBy);
-    }
+		return Optional.of(modifiedBy);
+	}
 }

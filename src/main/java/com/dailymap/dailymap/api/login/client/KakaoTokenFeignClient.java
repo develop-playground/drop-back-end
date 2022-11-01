@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @FeignClient(name = "kakaoTokenFeignClient", url = "https://kauth.kakao.com")
 public interface KakaoTokenFeignClient {
 
-    @PostMapping(value = "/oauth/token", consumes = "application/x-www-form-urlencoded;charset=utf-8")
-    KakaoTokenResponseDto getKakaoToken(@SpringQueryMap KakaoTokenRequestDto request);
+	@PostMapping(value = "/oauth/token", consumes = "application/x-www-form-urlencoded;charset=utf-8")
+	KakaoTokenResponseDto getKakaoToken(@SpringQueryMap KakaoTokenRequestDto request);
 
 }

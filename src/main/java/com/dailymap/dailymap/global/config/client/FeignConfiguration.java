@@ -15,15 +15,15 @@ import org.springframework.context.annotation.Import;
 @Import(FeignClientsConfiguration.class)
 public class FeignConfiguration {
 
-    @Bean
-    Logger.Level feignLoggerLevel() {
-        return Logger.Level.BASIC;
-    }
+	@Bean
+	Logger.Level feignLoggerLevel() {
+		return Logger.Level.BASIC;
+	}
 
-    @Bean
-    @ConditionalOnMissingBean(value = ErrorDecoder.class)
-    public FeignClientExceptionErrorDecoder commonFeignErrorDecoder() {
-        return new FeignClientExceptionErrorDecoder();
-    }
+	@Bean
+	@ConditionalOnMissingBean(value = ErrorDecoder.class)
+	public FeignClientExceptionErrorDecoder commonFeignErrorDecoder() {
+		return new FeignClientExceptionErrorDecoder();
+	}
 
 }

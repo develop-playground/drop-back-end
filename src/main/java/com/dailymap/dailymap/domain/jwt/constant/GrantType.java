@@ -5,12 +5,12 @@ import lombok.Getter;
 @Getter
 public enum GrantType {
 
-    BEARER("Bearer");
+	BEARER("Bearer");
 
-    GrantType(String type) {
-        this.type = type;
-    }
+	GrantType(String type) {
+		this.type = type;
+	}
 
-    private String type;
+	private String type;
 
 }

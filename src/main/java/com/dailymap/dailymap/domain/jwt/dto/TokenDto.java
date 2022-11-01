@@ -5,22 +5,23 @@ import lombok.*;
 
 import java.util.Date;
 
-@Getter @Setter
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class TokenDto {
 
-    private String grantType;
+	private String grantType;
 
-    private String accessToken;
+	private String accessToken;
 
-    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Seoul")
-    private Date accessTokenExpireTime;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+	private Date accessTokenExpireTime;
 
-    private String refreshToken;
+	private String refreshToken;
 
-    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Seoul")
-    private Date refreshTokenExpireTime;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+	private Date refreshTokenExpireTime;
 
 }

@@ -16,23 +16,23 @@ import static com.dailymap.dailymap.global.error.exception.ErrorCode.MEMBER_NOT_
 @Transactional(readOnly = true)
 public class LogoutService {
 
-    private final TokenManager tokenManager;
+	private final TokenManager tokenManager;
 
-    private final MemberService memberService;
+	private final MemberService memberService;
 
-    @Transactional
-    public String logout(String authorization) {
-        String refreshToken = authorization.split(" ")[1];
+	@Transactional
+	public String logout(String authorization) {
+		String refreshToken = authorization.split(" ")[1];
 
-        Claims claims = tokenManager.getTokenClaims(refreshToken);
-        String email = claims.getAudience();
+		Claims claims = tokenManager.getTokenClaims(refreshToken);
+		String email = claims.getAudience();
 
-        Member findMember = memberService.findMemberByEmail(email)
-            .orElseThrow(() -> new BusinessException(MEMBER_NOT_EXISTS));
+		Member findMember = memberService.findMemberByEmail(email)
+			.orElseThrow(() -> new BusinessException(MEMBER_NOT_EXISTS));
 
-        findMember.expireRefreshToken();
+		findMember.expireRefreshToken();
 
-        return "logout : success";
-    }
+		return "logout : success";
+	}
 
 }

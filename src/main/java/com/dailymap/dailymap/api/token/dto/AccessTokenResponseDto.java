@@ -10,18 +10,18 @@ import java.util.Date;
 @Builder
 public class AccessTokenResponseDto {
 
-    private String grantType;
+	private String grantType;
 
-    private String accessToken;
+	private String accessToken;
 
-    private Date accessTokenExpireTime;
+	private Date accessTokenExpireTime;
 
-    public static AccessTokenResponseDto of(TokenDto tokenDto) {
-        return AccessTokenResponseDto.builder()
-            .grantType("Bearer")
-            .accessToken(tokenDto.getAccessToken())
-            .accessTokenExpireTime(tokenDto.getAccessTokenExpireTime())
-            .build();
-    }
+	public static AccessTokenResponseDto of(TokenDto tokenDto) {
+		return AccessTokenResponseDto.builder()
+			.grantType("Bearer")
+			.accessToken(tokenDto.getAccessToken())
+			.accessTokenExpireTime(tokenDto.getAccessTokenExpireTime())
+			.build();
+	}
 
 }

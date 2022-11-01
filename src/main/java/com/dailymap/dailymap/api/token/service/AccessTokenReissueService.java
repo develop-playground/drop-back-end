@@ -18,25 +18,25 @@ import static com.dailymap.dailymap.global.error.exception.ErrorCode.*;
 @RequiredArgsConstructor
 public class AccessTokenReissueService {
 
-    private final MemberService memberService;
+	private final MemberService memberService;
 
-    private final TokenManager tokenManager;
+	private final TokenManager tokenManager;
 
-    public AccessTokenResponseDto getAccessTokenResponseDto(String authorization) {
-        String refreshToken = authorization.split(" ")[1];
+	public AccessTokenResponseDto getAccessTokenResponseDto(String authorization) {
+		String refreshToken = authorization.split(" ")[1];
 
-        Member findMember = memberService.findMemberByRefreshToken(refreshToken)
-            .orElseThrow(() -> new BusinessException(MEMBER_NOT_EXISTS_BY_REFRESH_TOKEN));
-        String email = findMember.getEmail();
-        Date refreshTokenExpireTime = Timestamp.valueOf(findMember.getTokenExpirationTime());
+		Member findMember = memberService.findMemberByRefreshToken(refreshToken)
+			.orElseThrow(() -> new BusinessException(MEMBER_NOT_EXISTS_BY_REFRESH_TOKEN));
+		String email = findMember.getEmail();
+		Date refreshTokenExpireTime = Timestamp.valueOf(findMember.getTokenExpirationTime());
 
-        if (tokenManager.isTokenExpired(refreshTokenExpireTime)) {
-            throw new BusinessException(REFRESH_TOKEN_EXPIRED);
-        }
+		if (tokenManager.isTokenExpired(refreshTokenExpireTime)) {
+			throw new BusinessException(REFRESH_TOKEN_EXPIRED);
+		}
 
-        TokenDto tokenDto = tokenManager.createTokenDto(email);
+		TokenDto tokenDto = tokenManager.createTokenDto(email);
 
-        return AccessTokenResponseDto.of(tokenDto);
-    }
+		return AccessTokenResponseDto.of(tokenDto);
+	}
 
 }

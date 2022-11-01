@@ -17,41 +17,41 @@ import java.time.LocalDateTime;
 @Builder
 public class Member extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(unique = true, length = 50, nullable = false)
-    private String email;
+	@Column(unique = true, length = 50, nullable = false)
+	private String email;
 
-    private String username;
+	private String username;
 
-    @Enumerated(EnumType.STRING)
-    private MemberType memberType;
+	@Enumerated(EnumType.STRING)
+	private MemberType memberType;
 
-    private String refreshToken;
+	private String refreshToken;
 
-    @Column(length = 250)
-    private LocalDateTime tokenExpirationTime;
+	@Column(length = 250)
+	private LocalDateTime tokenExpirationTime;
 
-    public static Member of(String email, String name, MemberType memberType) {
-        return Member.builder()
-            .email(email)
-            .username(name)
-            .memberType(memberType)
-            .build();
-    }
+	public static Member of(String email, String name, MemberType memberType) {
+		return Member.builder()
+			.email(email)
+			.username(name)
+			.memberType(memberType)
+			.build();
+	}
 
-    public void updateUsername(String username) {
-        this.username = username;
-    }
+	public void updateUsername(String username) {
+		this.username = username;
+	}
 
-    public void updateRefreshInfo(String refreshToken, LocalDateTime refreshTokenExpireTime) {
-        this.refreshToken = refreshToken;
-        this.tokenExpirationTime = refreshTokenExpireTime;
-    }
+	public void updateRefreshInfo(String refreshToken, LocalDateTime refreshTokenExpireTime) {
+		this.refreshToken = refreshToken;
+		this.tokenExpirationTime = refreshTokenExpireTime;
+	}
 
-    public void expireRefreshToken() {
-        this.tokenExpirationTime = LocalDateTime.now();
-    }
+	public void expireRefreshToken() {
+		this.tokenExpirationTime = LocalDateTime.now();
+	}
 }

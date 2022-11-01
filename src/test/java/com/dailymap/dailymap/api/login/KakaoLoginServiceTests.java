@@ -18,50 +18,50 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class KakaoLoginServiceTests {
 
-    @Mock
-    KakaoTokenFeignClient kakaoTokenFeignClient;
+	@Mock
+	KakaoTokenFeignClient kakaoTokenFeignClient;
 
-    @Mock
-    LoginFeignClient loginFeignClient;
+	@Mock
+	LoginFeignClient loginFeignClient;
 
-    @Mock
-    TokenManager tokenManager;
+	@Mock
+	TokenManager tokenManager;
 
-    @Mock
-    MemberService memberService;
+	@Mock
+	MemberService memberService;
 
-    @Test
-    @DisplayName("FeignClient를 이용한 카카오 API 호출 검증")
-    public void kakaoAPICallVerificationTest() {
-        // Arrange
-        KakaoLoginService sut = new KakaoLoginService(
-            kakaoTokenFeignClient,
-            loginFeignClient,
-            tokenManager,
-            memberService
-        );
+	@Test
+	@DisplayName("FeignClient를 이용한 카카오 API 호출 검증")
+	public void kakaoAPICallVerificationTest() {
+		// Arrange
+		KakaoLoginService sut = new KakaoLoginService(
+			kakaoTokenFeignClient,
+			loginFeignClient,
+			tokenManager,
+			memberService
+		);
 
-        // Act
-        sut.getKakaoTokenDto(
-            "code",
-            "clientId",
-            "clientSecret",
-            "redirectUri"
-        );
+		// Act
+		sut.getKakaoTokenDto(
+			"code",
+			"clientId",
+			"clientSecret",
+			"redirectUri"
+		);
 
-        // Assert
-        verify(kakaoTokenFeignClient, times(1))
-            .getKakaoToken(any(KakaoTokenRequestDto.class));
-    }
+		// Assert
+		verify(kakaoTokenFeignClient, times(1))
+			.getKakaoToken(any(KakaoTokenRequestDto.class));
+	}
 
-    @Test
-    @DisplayName("카카오 유저정보를 이용한 로그인 및 회원가 검증")
-    public void loginUsingKakaoUserInfoTest() { // 추후 작성
-        // Arrange
+	@Test
+	@DisplayName("카카오 유저정보를 이용한 로그인 및 회원가 검증")
+	public void loginUsingKakaoUserInfoTest() { // 추후 작성
+		// Arrange
 
-        // Act
+		// Act
 
-        // Assert
-    }
+		// Assert
+	}
 
 }

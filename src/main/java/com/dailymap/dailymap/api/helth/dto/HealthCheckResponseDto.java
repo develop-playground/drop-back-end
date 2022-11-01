@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class HealthCheckResponseDto {
 
-    private boolean status;
+	private boolean status;
 
-    private String health;
+	private String health;
 
 }

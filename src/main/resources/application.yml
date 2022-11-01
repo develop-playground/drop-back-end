@@ -1,122 +1,122 @@
 spring:
-  profiles:
-    group:
-      dev:
-        - dev
-        - common
-      prod:
-        - prod
-        - common
-      test:
-        - test
-        - common
+    profiles:
+        group:
+            dev:
+                - dev
+                - common
+            prod:
+                - prod
+                - common
+            test:
+                - test
+                - common
 
 ---
 server:
-  port: 80
-  servlet:
-    context-path: /
+    port: 80
+    servlet:
+        context-path: /
 
 spring:
-  config:
-    activate:
-      on-profile: common
-  application:
-    name: DROP
-  jpa:
-    properties:
-      hibernate:
-        default_batch_fetch_size: 1000
-        format_sql: true
-        show_sql: true
-  jackson:
-    property-naming-strategy: SNAKE_CASE
+    config:
+        activate:
+            on-profile: common
+    application:
+        name: DROP
+    jpa:
+        properties:
+            hibernate:
+                default_batch_fetch_size: 1000
+                format_sql: true
+                show_sql: true
+    jackson:
+        property-naming-strategy: SNAKE_CASE
 
 ---
 spring:
-  config:
-    activate:
-      on-profile: dev
+    config:
+        activate:
+            on-profile: dev
 
-  datasource:
-    url: jdbc:h2:mem:test
-    username: root
-    password: 1234
-    driver-class-name: org.h2.Driver
+    datasource:
+        url: jdbc:h2:mem:test
+        username: root
+        password: 1234
+        driver-class-name: org.h2.Driver
 
-  jpa:
-    hibernate:
-      ddl-auto: create
+    jpa:
+        hibernate:
+            ddl-auto: create
 
 logging:
-  level:
-    org.hibernate.type: trace
+    level:
+        org.hibernate.type: trace
 
 # client id 및 secret, token secret은 추후 jasypt나 AWS Secret Manager로 보안설정 예정
 kakao:
-  client:
-    id: 661685b0f0b7c48454e26b4cd57f2db1
-    secret: 3EbfiGsb9bam4fx3LhLKlDnSuM8PZ7Zx
-    redirect-uri: http://localhost/api/auth/kakao/callback
+    client:
+        id: 661685b0f0b7c48454e26b4cd57f2db1
+        secret: 3EbfiGsb9bam4fx3LhLKlDnSuM8PZ7Zx
+        redirect-uri: http://localhost/api/auth/kakao/callback
 
 token:
-  secret: dev-playground-drop
-  access-token-expired-time: 900000 # 15 * 60 * 1000
-  refresh-token-expired-time: 1210500000 # 4 * 24 * 60 *1 60 * 1000
+    secret: dev-playground-drop
+    access-token-expired-time: 900000 # 15 * 60 * 1000
+    refresh-token-expired-time: 1210500000 # 4 * 24 * 60 *1 60 * 1000
 
 ---
 spring:
-  config:
-    activate:
-      on-profile: prod
+    config:
+        activate:
+            on-profile: prod
 
-# DB 계정정보 및 패스워드 정보 암호화 보안설정 예정
-  datasource:
-    url: jdbc:mysql://daily-map-database.c2yszpxq2xbo.ap-northeast-2.rds.amazonaws.com:3306/devdrop?characterEncoding=UTF-8&useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
-    username: admin
-    password: "##playground123"
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    # DB 계정정보 및 패스워드 정보 암호화 보안설정 예정
+    datasource:
+        url: jdbc:mysql://daily-map-database.c2yszpxq2xbo.ap-northeast-2.rds.amazonaws.com:3306/devdrop?characterEncoding=UTF-8&useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
+        username: admin
+        password: "##playground123"
+        driver-class-name: com.mysql.cj.jdbc.Driver
 
-  jpa:
-    hibernate:
-      ddl-auto: update
+    jpa:
+        hibernate:
+            ddl-auto: update
 
 logging:
-  level:
-    org.hibernate.type: info
+    level:
+        org.hibernate.type: info
 
 # client id 및 secret, token secret은 추후 jasypt나 AWS Secret Manager로 보안설정 예정
 kakao:
-  client:
-    id: 661685b0f0b7c48454e26b4cd57f2db1
-    secret: 3EbfiGsb9bam4fx3LhLKlDnSuM8PZ7Zx
-    redirect-uri: http://3.34.194.171/api/auth/kakao/callback
+    client:
+        id: 661685b0f0b7c48454e26b4cd57f2db1
+        secret: 3EbfiGsb9bam4fx3LhLKlDnSuM8PZ7Zx
+        redirect-uri: http://3.34.194.171/api/auth/kakao/callback
 
 token:
-  secret: dev-playground-drop
-  access-token-expired-time: 900000 # 15 * 60 * 1000
-  refresh-token-expired-time: 1210500000 # 4 * 24 * 60 *1 60 * 1000
+    secret: dev-playground-drop
+    access-token-expired-time: 900000 # 15 * 60 * 1000
+    refresh-token-expired-time: 1210500000 # 4 * 24 * 60 *1 60 * 1000
 
 ---
 spring:
-  config:
-    activate:
-      on-profile: test
+    config:
+        activate:
+            on-profile: test
 
-  datasource:
-    url: jdbc:h2:mem:test
-    username: root
-    password: 1234
-    driver-class-name: org.h2.Driver
+    datasource:
+        url: jdbc:h2:mem:test
+        username: root
+        password: 1234
+        driver-class-name: org.h2.Driver
 
 # client id 및 secret, token secret은 추후 jasypt나 AWS Secret Manager로 보안설정 예정
 kakao:
-  client:
-    id: 661685b0f0b7c48454e26b4cd57f2db1
-    secret: 3EbfiGsb9bam4fx3LhLKlDnSuM8PZ7Zx
-    redirect-uri: http://localhost/api/auth/kakao/callback
+    client:
+        id: 661685b0f0b7c48454e26b4cd57f2db1
+        secret: 3EbfiGsb9bam4fx3LhLKlDnSuM8PZ7Zx
+        redirect-uri: http://localhost/api/auth/kakao/callback
 
 token:
-  secret: dev-playground-drop
-  access-token-expired-time: 900000 # 15 * 60 * 1000
-  refresh-token-expired-time: 1210500000 # 4 * 24 * 60 *1 60 * 1000
+    secret: dev-playground-drop
+    access-token-expired-time: 900000 # 15 * 60 * 1000
+    refresh-token-expired-time: 1210500000 # 4 * 24 * 60 *1 60 * 1000

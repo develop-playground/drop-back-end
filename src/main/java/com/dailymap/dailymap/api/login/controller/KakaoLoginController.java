@@ -14,37 +14,37 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/auth")
 public class KakaoLoginController {
 
-    private final KakaoLoginService kakaoLoginService;
+	private final KakaoLoginService kakaoLoginService;
 
-    @Value("${kakao.client.id}")
-    private String clientId;
+	@Value("${kakao.client.id}")
+	private String clientId;
 
-    @Value("${kakao.client.secret}")
-    private String clientSecret;
+	@Value("${kakao.client.secret}")
+	private String clientSecret;
 
-    @Value("${kakao.client.redirect-uri}")
-    private String redirectUri;
+	@Value("${kakao.client.redirect-uri}")
+	private String redirectUri;
 
-    @GetMapping("/kakao/callback")
-    public ResponseEntity<KakaoTokenResponseDto> loginCallback(String code) {
-        KakaoTokenResponseDto kakaoToken = kakaoLoginService.getKakaoTokenDto(
-            code,
-            clientId,
-            clientSecret,
-            redirectUri
-        );
+	@GetMapping("/kakao/callback")
+	public ResponseEntity<KakaoTokenResponseDto> loginCallback(String code) {
+		KakaoTokenResponseDto kakaoToken = kakaoLoginService.getKakaoTokenDto(
+			code,
+			clientId,
+			clientSecret,
+			redirectUri
+		);
 
-        return ResponseEntity.ok(kakaoToken);
-    }
+		return ResponseEntity.ok(kakaoToken);
+	}
 
-    @PostMapping("/login")
-    public ResponseEntity<TokenDto> login(
-        @RequestHeader("Authorization") String authorization,
-        @RequestBody LoginRequestDto loginRequestDto
-    ) {
-        TokenDto tokenDto = kakaoLoginService.login(authorization, loginRequestDto);
+	@PostMapping("/login")
+	public ResponseEntity<TokenDto> login(
+		@RequestHeader("Authorization") String authorization,
+		@RequestBody LoginRequestDto loginRequestDto
+	) {
+		TokenDto tokenDto = kakaoLoginService.login(authorization, loginRequestDto);
 
-        return ResponseEntity.ok(tokenDto);
-    }
+		return ResponseEntity.ok(tokenDto);
+	}
 
 }

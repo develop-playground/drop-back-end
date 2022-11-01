@@ -19,32 +19,32 @@ import static org.mockito.Mockito.*;
 @ActiveProfiles("test")
 public class KakaoLoginControllerTests extends DailymapApplicationTests {
 
-    @Mock
-    KakaoLoginService kakaoLoginService;
+	@Mock
+	KakaoLoginService kakaoLoginService;
 
-    @Test
-    @DisplayName("카카오 토큰 생성 성공 검증")
-    public void getKakaoTokenDtoTest() {
-        // Arrange
-        KakaoLoginController sut = new KakaoLoginController(kakaoLoginService);
-        when(kakaoLoginService.getKakaoTokenDto(
-            "code",
-            null,
-            null,
-            null
-            )
-        ).thenReturn(
-            KakaoTokenResponseDto.builder()
-                .access_token("test.access.token")
-                .build()
-        );
+	@Test
+	@DisplayName("카카오 토큰 생성 성공 검증")
+	public void getKakaoTokenDtoTest() {
+		// Arrange
+		KakaoLoginController sut = new KakaoLoginController(kakaoLoginService);
+		when(kakaoLoginService.getKakaoTokenDto(
+				"code",
+				null,
+				null,
+				null
+			)
+		).thenReturn(
+			KakaoTokenResponseDto.builder()
+				.access_token("test.access.token")
+				.build()
+		);
 
-        // Act
-        ResponseEntity<KakaoTokenResponseDto> responseBody = sut.loginCallback("code");
+		// Act
+		ResponseEntity<KakaoTokenResponseDto> responseBody = sut.loginCallback("code");
 
-        // Assert
-        Assertions.assertEquals(200, responseBody.getStatusCodeValue());
-        Assertions.assertEquals("test.access.token", responseBody.getBody().getAccess_token());
-    }
+		// Assert
+		Assertions.assertEquals(200, responseBody.getStatusCodeValue());
+		Assertions.assertEquals("test.access.token", responseBody.getBody().getAccess_token());
+	}
 
 }

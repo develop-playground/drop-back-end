@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AccessTokenReissueController {
 
-    private final AccessTokenReissueService accessTokenReissueService;
+	private final AccessTokenReissueService accessTokenReissueService;
 
-    @PostMapping("/token/reissue")
-    public AccessTokenResponseDto accessTokenReissue(@RequestHeader("Authorization")String authorization) {
-        AccessTokenResponseDto responseDto = accessTokenReissueService.getAccessTokenResponseDto(authorization);
-        return responseDto;
-    }
+	@PostMapping("/token/reissue")
+	public AccessTokenResponseDto accessTokenReissue(@RequestHeader("Authorization") String authorization) {
+		AccessTokenResponseDto responseDto = accessTokenReissueService.getAccessTokenResponseDto(authorization);
+		return responseDto;
+	}
 
 }

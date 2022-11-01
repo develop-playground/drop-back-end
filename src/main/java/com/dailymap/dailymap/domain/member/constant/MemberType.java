@@ -7,12 +7,12 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum MemberType {
 
-    KAKAO(0,"카카오회원"),
-    NAVER(1,"네이버회원"),
-    GOOGLE(2,"구글회원"),
-    ;
+	KAKAO(0, "카카오회원"),
+	NAVER(1, "네이버회원"),
+	GOOGLE(2, "구글회원"),
+	;
 
-    private Integer id;
-    private String title;
+	private Integer id;
+	private String title;
 
 }

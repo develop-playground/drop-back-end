@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/health")
 public class HealthCheckController {
 
-    private final HealthCheckService healthCheckService;
+	private final HealthCheckService healthCheckService;
 
-    @GetMapping
-    public ResponseEntity<HealthCheckResponseDto> healthCheck() {
-        HealthCheckResponseDto responseDto = healthCheckService.createResponse();
-        return ResponseEntity.ok(responseDto);
-    }
+	@GetMapping
+	public ResponseEntity<HealthCheckResponseDto> healthCheck() {
+		HealthCheckResponseDto responseDto = healthCheckService.createResponse();
+		return ResponseEntity.ok(responseDto);
+	}
 
 }

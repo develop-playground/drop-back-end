@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/auth")
 public class LogoutController {
 
-    private final LogoutService logoutService;
+	private final LogoutService logoutService;
 
-    @PostMapping("/logout")
-    public ResponseEntity<String> logout(@RequestHeader("Authorization")String authorization) {
-        return ResponseEntity.ok(logoutService.logout(authorization));
-    }
+	@PostMapping("/logout")
+	public ResponseEntity<String> logout(@RequestHeader("Authorization") String authorization) {
+		return ResponseEntity.ok(logoutService.logout(authorization));
+	}
 
 }
