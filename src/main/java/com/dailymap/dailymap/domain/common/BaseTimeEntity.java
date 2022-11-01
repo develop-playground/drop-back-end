@@ -9,7 +9,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
-@EntityListeners(AuditingEntityListener.class)
+@EntityListeners(value = AuditingEntityListener.class)
 @MappedSuperclass
 @Getter
 public abstract class BaseTimeEntity {
