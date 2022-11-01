@@ -89,7 +89,7 @@ public class TokenManager {
         return false;
     }
 
-    private Claims getTokenClaims(String token) {
+    public Claims getTokenClaims(String token) {
         Claims claims;
         try {
             claims = Jwts.parser().setSigningKey(tokenSecret)
