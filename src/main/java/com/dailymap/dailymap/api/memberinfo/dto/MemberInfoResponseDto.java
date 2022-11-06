@@ -1,6 +1,7 @@
 package com.dailymap.dailymap.api.memberinfo.dto;
 
 import com.dailymap.dailymap.domain.member.model.Member;
+
 import lombok.Builder;
 import lombok.Getter;
 

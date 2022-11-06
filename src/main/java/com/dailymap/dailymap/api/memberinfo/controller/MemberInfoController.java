@@ -1,13 +1,13 @@
 package com.dailymap.dailymap.api.memberinfo.controller;
 
 import com.dailymap.dailymap.api.memberinfo.dto.MemberInfoResponseDto;
+import com.dailymap.dailymap.api.memberinfo.dto.UpdateUsernameRequestDto;
 import com.dailymap.dailymap.api.memberinfo.service.MemberInfoService;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -19,6 +19,15 @@ public class MemberInfoController {
     @GetMapping("/user")
     public ResponseEntity<MemberInfoResponseDto> findMemberInfo(@RequestHeader("Authorization") String authorization) {
         MemberInfoResponseDto memberInfoResponseDto = memberInfoService.getMemberInfo(authorization);
+        return ResponseEntity.ok(memberInfoResponseDto);
+    }
+
+    @PatchMapping("/user")
+    public ResponseEntity<MemberInfoResponseDto> updateMemberUsername(
+        @RequestHeader("Authorization")String authorization,
+        @RequestBody UpdateUsernameRequestDto requestDto
+        ) {
+        MemberInfoResponseDto memberInfoResponseDto = memberInfoService.updateUsername(authorization,requestDto);
         return ResponseEntity.ok(memberInfoResponseDto);
     }
 
