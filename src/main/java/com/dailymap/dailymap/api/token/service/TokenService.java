@@ -29,14 +29,8 @@ public class TokenService {
         Member findMember = memberService.findMemberByRefreshToken(refreshToken)
             .orElseThrow(() -> new BusinessException(MEMBER_NOT_EXISTS_BY_REFRESH_TOKEN));
         String email = findMember.getEmail();
-        Date refreshTokenExpireTime = Timestamp.valueOf(findMember.getTokenExpirationTime());
-
-        if (tokenManager.isTokenExpired(refreshTokenExpireTime)) {
-            throw new BusinessException(REFRESH_TOKEN_EXPIRED);
-        }
 
         TokenDto tokenDto = tokenManager.createTokenDto(email);
-
         return AccessTokenResponseDto.of(tokenDto);
     }
 
