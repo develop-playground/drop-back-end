@@ -31,4 +31,9 @@ public class MemberInfoController {
         return ResponseEntity.ok(memberInfoResponseDto);
     }
 
+    @DeleteMapping("/user")
+    public ResponseEntity<String> memberSecession(@RequestHeader("Authorization")String authorization) {
+        return ResponseEntity.ok(memberInfoService.memberSecession(authorization));
+    }
+
 }

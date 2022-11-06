@@ -42,4 +42,16 @@ public class MemberInfoService {
 
         return MemberInfoResponseDto.of(findMember);
     }
+
+    @Transactional
+    public String memberSecession(String authorization) {
+        String refreshToken = authorization.split(" ")[1];
+
+        Member findMember = memberService.findMemberByRefreshToken(refreshToken)
+            .orElseThrow(() -> new BusinessException(MEMBER_NOT_EXISTS_BY_REFRESH_TOKEN));
+
+        memberService.delete(findMember);
+        return "secession : success";
+    }
+
 }
