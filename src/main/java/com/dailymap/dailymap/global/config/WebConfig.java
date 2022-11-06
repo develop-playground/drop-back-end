@@ -30,7 +30,8 @@ public class WebConfig implements WebMvcConfigurer {
             .order(2)
             .addPathPatterns("/api/auth/**")
             .excludePathPatterns("/api/auth/kakao/callback")
-            .excludePathPatterns("/api/auth/login");
+            .excludePathPatterns("/api/auth/login")
+            .excludePathPatterns("api/auth/refreshtoken");
         registry.addInterceptor(accessTokenUseInterceptor)
             .order(3)
             .addPathPatterns("/api/**")
