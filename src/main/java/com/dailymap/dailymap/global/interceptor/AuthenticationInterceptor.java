@@ -33,12 +33,17 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             throw new AuthorizationException(NOT_EXISTS_AUTHORIZATION);
         }
 
-        String bearer = authorization.split(" ")[0];
+        String[] headerSplits = authorization.split(" ");
+        if (headerSplits.length != 2) {
+            throw new AuthorizationException(NOT_VALID_TOKEN);
+        }
+
+        String bearer = headerSplits[0];
         if (!"Bearer".equals(bearer)) {
             throw new AuthorizationException(NOT_VALID_BEARER_GRANT_TYPE);
         }
 
-        String token = authorization.split(" ")[1];
+        String token = headerSplits[1];
         if (!tokenManager.validateToken(token)) {
             throw new AuthorizationException(NOT_VALID_TOKEN);
         }

@@ -21,7 +21,7 @@ public class MemberInfoService {
     private final MemberService memberService;
 
     public MemberInfoResponseDto getMemberInfo(String authorization) {
-        String refreshToken = authorization.split(" ")[1];
+        String refreshToken = getRefreshToken(authorization);
 
         Member findMember = getMemberByRefreshToken(refreshToken);
 
@@ -30,7 +30,7 @@ public class MemberInfoService {
 
     @Transactional
     public MemberInfoResponseDto updateUsername(String authorization, UpdateUsernameRequestDto requestDto) {
-        String refreshToken = authorization.split(" ")[1];
+        String refreshToken = getRefreshToken(authorization);
 
         Member findMember = getMemberByRefreshToken(refreshToken);
 
@@ -42,7 +42,7 @@ public class MemberInfoService {
 
     @Transactional
     public String memberSecession(String authorization) {
-        String refreshToken = authorization.split(" ")[1];
+        String refreshToken = getRefreshToken(authorization);
 
         Member findMember = getMemberByRefreshToken(refreshToken);
 
@@ -53,6 +53,10 @@ public class MemberInfoService {
     private Member getMemberByRefreshToken(String refreshToken) {
         return memberService.findMemberByRefreshToken(refreshToken)
             .orElseThrow(() -> new BusinessException(MEMBER_NOT_EXISTS_BY_REFRESH_TOKEN));
+    }
+
+    private String getRefreshToken(String authorization) {
+        return authorization.split(" ")[1];
     }
 
 }
