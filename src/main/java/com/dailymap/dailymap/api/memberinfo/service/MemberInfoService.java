@@ -20,12 +20,10 @@ public class MemberInfoService {
 
     private final MemberService memberService;
 
-
     public MemberInfoResponseDto getMemberInfo(String authorization) {
         String refreshToken = authorization.split(" ")[1];
 
-        Member findMember = memberService.findMemberByRefreshToken(refreshToken)
-            .orElseThrow(() -> new BusinessException(MEMBER_NOT_EXISTS_BY_REFRESH_TOKEN));
+        Member findMember = getMemberByRefreshToken(refreshToken);
 
         return MemberInfoResponseDto.of(findMember);
     }
@@ -34,8 +32,7 @@ public class MemberInfoService {
     public MemberInfoResponseDto updateUsername(String authorization, UpdateUsernameRequestDto requestDto) {
         String refreshToken = authorization.split(" ")[1];
 
-        Member findMember = memberService.findMemberByRefreshToken(refreshToken)
-            .orElseThrow(() -> new BusinessException(MEMBER_NOT_EXISTS_BY_REFRESH_TOKEN));
+        Member findMember = getMemberByRefreshToken(refreshToken);
 
         String newUsername = requestDto.getUsername();
         findMember.updateUsername(newUsername);
@@ -47,11 +44,15 @@ public class MemberInfoService {
     public String memberSecession(String authorization) {
         String refreshToken = authorization.split(" ")[1];
 
-        Member findMember = memberService.findMemberByRefreshToken(refreshToken)
-            .orElseThrow(() -> new BusinessException(MEMBER_NOT_EXISTS_BY_REFRESH_TOKEN));
+        Member findMember = getMemberByRefreshToken(refreshToken);
 
         memberService.delete(findMember);
         return "secession : success";
+    }
+
+    private Member getMemberByRefreshToken(String refreshToken) {
+        return memberService.findMemberByRefreshToken(refreshToken)
+            .orElseThrow(() -> new BusinessException(MEMBER_NOT_EXISTS_BY_REFRESH_TOKEN));
     }
 
 }
