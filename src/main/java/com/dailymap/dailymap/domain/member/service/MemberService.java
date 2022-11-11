@@ -32,4 +32,10 @@ public class MemberService {
     public Optional<Member> findMemberByRefreshToken(String refreshToken) {
         return memberRepository.findByRefreshToken(refreshToken);
     }
+
+    @Transactional
+    public void delete(Member member) {
+        memberRepository.delete(member);
+    }
+
 }
