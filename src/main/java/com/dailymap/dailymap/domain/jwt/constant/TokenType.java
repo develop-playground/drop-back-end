@@ -14,4 +14,9 @@ public enum TokenType {
         return accessTokenName.equals(tokenType);
     }
 
+    public static boolean isRefreshToken(String tokenType) {
+        String refreshTokenName = REFRESH.name();
+        return refreshTokenName.equals(tokenType);
+    }
+
 }
