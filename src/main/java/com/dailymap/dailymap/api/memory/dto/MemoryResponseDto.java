@@ -51,4 +51,28 @@ public interface MemoryResponseDto {
         }
     }
 
+    @Builder
+    @Getter
+    class Find {
+        private Long id;
+
+        private List<String> imageUrls;
+
+        private String content;
+
+        private Location location;
+
+        private String createdDate;
+
+        public static MemoryResponseDto.Find from(Memory memory) {
+            return MemoryResponseDto.Find.builder()
+                .id(memory.getId())
+                .imageUrls(memory.getImageUrls())
+                .content(memory.getContent())
+                .location(memory.getLocation())
+                .createdDate(DateTimeUtils.convertToStringDateFormat(memory.getCreateTime()))
+                .build();
+        }
+    }
+
 }

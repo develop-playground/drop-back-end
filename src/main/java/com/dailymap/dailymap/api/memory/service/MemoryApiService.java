@@ -11,8 +11,12 @@ import com.dailymap.dailymap.global.error.exception.BusinessException;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.dailymap.dailymap.global.error.exception.ErrorCode.MEMBER_NOY_EXISTS_BY_ACCESS_TOKEN;
 
@@ -36,6 +40,17 @@ public class MemoryApiService {
         Memory savedMemory = memoryService.save(memory);
 
         return MemoryResponseDto.Register.from(savedMemory);
+    }
+
+    public List<MemoryResponseDto.Find> getResponseDtos(final String authorization, final Pageable pageable) {
+        String email = getMemberEmail(authorization);
+        Member findMember = getMemberByEmail(email);
+
+        List<Memory> memories = memoryService.findAllByMember(findMember, pageable);
+
+        return memories.stream()
+            .map(MemoryResponseDto.Find::from)
+            .collect(Collectors.toList());
     }
 
     private Member getMemberByEmail(final String email) {
@@ -66,4 +81,5 @@ public class MemoryApiService {
 
         return "success";
     }
+
 }

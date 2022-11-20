@@ -6,8 +6,13 @@ import com.dailymap.dailymap.api.memory.service.MemoryApiService;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,6 +28,15 @@ public class MemoryController {
     ) {
         MemoryResponseDto.Register responseDto = memoryService.save(authorization, requestDto);
         return ResponseEntity.ok(responseDto);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<MemoryResponseDto.Find>> findAllMemory(
+        @RequestHeader("Authorization") String authorization,
+        @PageableDefault(size=10, sort="id", direction = Sort.Direction.DESC) Pageable pageable
+    ) {
+        List<MemoryResponseDto.Find> responseDtos = memoryService.getResponseDtos(authorization, pageable);
+        return ResponseEntity.ok(responseDtos);
     }
 
     @PatchMapping("{id}")
