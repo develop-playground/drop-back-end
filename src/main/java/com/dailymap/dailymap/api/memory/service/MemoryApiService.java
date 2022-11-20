@@ -42,6 +42,11 @@ public class MemoryApiService {
         return MemoryResponseDto.Register.from(savedMemory);
     }
 
+    public MemoryResponseDto.Find getResponseDto(final Long id) {
+        Memory memory = memoryService.findById(id);
+        return MemoryResponseDto.Find.from(memory);
+    }
+
     public List<MemoryResponseDto.Find> getResponseDtos(final String authorization, final Pageable pageable) {
         String email = getMemberEmail(authorization);
         Member findMember = getMemberByEmail(email);
@@ -65,7 +70,7 @@ public class MemoryApiService {
     }
 
     @Transactional
-    public MemoryResponseDto.Update getResponseDto(final Long id, final MemoryRequestDto.Update requestDto) {
+    public MemoryResponseDto.Update update(final Long id, final MemoryRequestDto.Update requestDto) {
         String newContent = requestDto.getContent();
 
         Memory findMemory = memoryService.findById(id);

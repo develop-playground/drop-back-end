@@ -30,6 +30,15 @@ public class MemoryController {
         return ResponseEntity.ok(responseDto);
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity<MemoryResponseDto.Find> findMemory(
+        @RequestHeader("Authorization") String authorization,
+        @PathVariable Long id
+    ) {
+        MemoryResponseDto.Find responseDto = memoryService.getResponseDto(id);
+        return ResponseEntity.ok(responseDto);
+    }
+
     @GetMapping
     public ResponseEntity<List<MemoryResponseDto.Find>> findAllMemory(
         @RequestHeader("Authorization") String authorization,
@@ -45,7 +54,7 @@ public class MemoryController {
         @PathVariable final Long id,
         @RequestBody MemoryRequestDto.Update requestDto
     ) {
-        MemoryResponseDto.Update responseDto = memoryService.getResponseDto(id, requestDto);
+        MemoryResponseDto.Update responseDto = memoryService.update(id, requestDto);
         return ResponseEntity.ok(responseDto);
     }
 
