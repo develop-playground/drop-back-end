@@ -30,4 +30,10 @@ public interface MemoryRequestDto {
         }
     }
 
+    @Builder
+    @Getter
+    class Update {
+        private String content;
+    }
+
 }

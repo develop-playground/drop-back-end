@@ -33,4 +33,8 @@ public class Memory extends BaseEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    public void updateContent(String newContent) {
+        this.content = newContent;
+    }
+
 }

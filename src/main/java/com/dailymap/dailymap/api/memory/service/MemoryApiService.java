@@ -6,7 +6,7 @@ import com.dailymap.dailymap.domain.jwt.service.TokenManager;
 import com.dailymap.dailymap.domain.member.model.Member;
 import com.dailymap.dailymap.domain.member.service.MemberService;
 import com.dailymap.dailymap.domain.memory.model.Memory;
-import com.dailymap.dailymap.domain.memory.repository.MemoryRepository;
+import com.dailymap.dailymap.domain.memory.service.MemoryService;
 import com.dailymap.dailymap.global.error.exception.BusinessException;
 
 import lombok.RequiredArgsConstructor;
@@ -25,7 +25,7 @@ public class MemoryApiService {
 
     private final TokenManager tokenManager;
 
-    private final MemoryRepository memoryRepository;
+    private final MemoryService memoryService;
 
     @Transactional
     public MemoryResponseDto.Register save(final String authorization, final MemoryRequestDto.Register requestDto) {
@@ -33,7 +33,7 @@ public class MemoryApiService {
         Member findMember = getMemberByEmail(email);
 
         Memory memory = requestDto.toEntity(findMember);
-        Memory savedMemory = memoryRepository.save(memory);
+        Memory savedMemory = memoryService.save(memory);
 
         return MemoryResponseDto.Register.from(savedMemory);
     }
@@ -47,6 +47,16 @@ public class MemoryApiService {
         String accessToken = authorization.split(" ")[1];
 
         return tokenManager.getMemberEmail(accessToken);
+    }
+
+    @Transactional
+    public MemoryResponseDto.Update getResponseDto(final Long id, final MemoryRequestDto.Update requestDto) {
+        String newContent = requestDto.getContent();
+
+        Memory findMemory = memoryService.findById(id);
+        findMemory.updateContent(newContent);
+
+        return MemoryResponseDto.Update.from(findMemory);
     }
 
 }

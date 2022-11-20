@@ -24,4 +24,14 @@ public class MemoryController {
         return ResponseEntity.ok(responseDto);
     }
 
+    @PatchMapping("{id}")
+    public ResponseEntity<MemoryResponseDto.Update> changeContent(
+        @RequestHeader("Authorization") String authorization,
+        @PathVariable final Long id,
+        @RequestBody MemoryRequestDto.Update requestDto
+    ) {
+        MemoryResponseDto.Update responseDto = memoryService.getResponseDto(id, requestDto);
+        return ResponseEntity.ok(responseDto);
+    }
+
 }

@@ -35,6 +35,20 @@ public interface MemoryResponseDto {
         }
     }
 
+    @Builder
+    @Getter
+    class Update {
+        private Long id;
 
+        private String content;
+
+        public static MemoryResponseDto.Update from(Memory memory) {
+            return Update
+                .builder()
+                .id(memory.getId())
+                .content(memory.getContent())
+                .build();
+        }
+    }
 
 }
