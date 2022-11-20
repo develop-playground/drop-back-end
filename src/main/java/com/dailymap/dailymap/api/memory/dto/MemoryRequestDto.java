@@ -4,8 +4,10 @@ import com.dailymap.dailymap.domain.member.model.Member;
 import com.dailymap.dailymap.domain.memory.model.Location;
 import com.dailymap.dailymap.domain.memory.model.Memory;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -30,8 +32,10 @@ public interface MemoryRequestDto {
         }
     }
 
-    @Builder
     @Getter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
     class Update {
         private String content;
     }
