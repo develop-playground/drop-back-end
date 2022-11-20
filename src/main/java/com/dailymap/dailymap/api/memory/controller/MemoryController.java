@@ -2,9 +2,10 @@ package com.dailymap.dailymap.api.memory.controller;
 
 import com.dailymap.dailymap.api.memory.dto.MemoryRequestDto;
 import com.dailymap.dailymap.api.memory.dto.MemoryResponseDto;
-
 import com.dailymap.dailymap.api.memory.service.MemoryApiService;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,6 +33,11 @@ public class MemoryController {
     ) {
         MemoryResponseDto.Update responseDto = memoryService.getResponseDto(id, requestDto);
         return ResponseEntity.ok(responseDto);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteMemory(@PathVariable final Long id) {
+        return ResponseEntity.ok(memoryService.delete(id));
     }
 
 }

@@ -25,4 +25,8 @@ public class MemoryService {
             .orElseThrow(() -> new BusinessException(MEMORY_NOT_EXISTS_BY_ID));
     }
 
+    @Transactional
+    public void delete(final Memory memory) {
+        memoryRepository.delete(memory);
+    }
 }

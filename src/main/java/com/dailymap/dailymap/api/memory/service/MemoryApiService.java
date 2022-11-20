@@ -59,4 +59,11 @@ public class MemoryApiService {
         return MemoryResponseDto.Update.from(findMemory);
     }
 
+    @Transactional
+    public String delete(final Long id) {
+        Memory findMemory = memoryService.findById(id);
+        memoryService.delete(findMemory);
+
+        return "success";
+    }
 }
