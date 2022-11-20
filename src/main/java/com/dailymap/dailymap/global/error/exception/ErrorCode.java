@@ -18,6 +18,7 @@ public enum ErrorCode {
     // 회원
     MEMBER_NOT_EXISTS(400, "해당 회원은 존재하지 않습니다."),
     MEMBER_NOT_EXISTS_BY_REFRESH_TOKEN(400, "해당 리프레시 토큰을 가진 회원은 존재하지 않습니다."),
+    MEMBER_NOY_EXISTS_BY_ACCESS_TOKEN(400, "해당 액세스 토큰을 가진 회원은 존재하지 않습니다."),
     ;
 
     ErrorCode(int status, String message) {

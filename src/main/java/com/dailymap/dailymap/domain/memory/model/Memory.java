@@ -2,9 +2,11 @@ package com.dailymap.dailymap.domain.memory.model;
 
 import com.dailymap.dailymap.domain.common.BaseEntity;
 import com.dailymap.dailymap.domain.member.model.Member;
+
 import lombok.*;
 
 import javax.persistence.*;
+
 import java.util.List;
 
 @Entity
@@ -19,14 +21,13 @@ public class Memory extends BaseEntity {
     private Long id;
 
     @ElementCollection
-    @NonNull
     private List<String> imageUrls;
 
     @Column(length = 1000)
     private String content;
 
     @Embedded
-    private Location location;
+    private Location location = new Location();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
