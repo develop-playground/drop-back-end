@@ -22,6 +22,7 @@ public enum ErrorCode {
 
     // 추억
     MEMORY_NOT_EXISTS_BY_ID(401, "해당 ID에 해당하는 추억이 존재하지 않습니다."),
+    NOT_VALID_MEMORY_BY_MEMBER(401, "해당 추억과 사용자가 일치하지 않습니다."),
     ;
 
     ErrorCode(int status, String message) {

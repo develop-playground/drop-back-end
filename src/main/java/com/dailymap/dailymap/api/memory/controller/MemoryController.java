@@ -31,10 +31,7 @@ public class MemoryController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<MemoryResponseDto.Find> findMemory(
-        @RequestHeader("Authorization") String authorization,
-        @PathVariable Long id
-    ) {
+    public ResponseEntity<MemoryResponseDto.Find> findMemory(@PathVariable Long id) {
         MemoryResponseDto.Find responseDto = memoryService.getResponseDto(id);
         return ResponseEntity.ok(responseDto);
     }
@@ -54,13 +51,16 @@ public class MemoryController {
         @PathVariable final Long id,
         @RequestBody MemoryRequestDto.Update requestDto
     ) {
-        MemoryResponseDto.Update responseDto = memoryService.update(id, requestDto);
+        MemoryResponseDto.Update responseDto = memoryService.update(authorization, id, requestDto);
         return ResponseEntity.ok(responseDto);
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<String> deleteMemory(@PathVariable final Long id) {
-        return ResponseEntity.ok(memoryService.delete(id));
+    public ResponseEntity<String> deleteMemory(
+        @RequestHeader("Authorization") String authorization,
+        @PathVariable final Long id
+    ) {
+        return ResponseEntity.ok(memoryService.delete(authorization,id));
     }
 
 }

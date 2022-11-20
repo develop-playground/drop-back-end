@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.dailymap.dailymap.global.error.exception.ErrorCode.MEMBER_NOY_EXISTS_BY_ACCESS_TOKEN;
+import static com.dailymap.dailymap.global.error.exception.ErrorCode.NOT_VALID_MEMORY_BY_MEMBER;
 
 @Service
 @RequiredArgsConstructor
@@ -65,26 +66,40 @@ public class MemoryApiService {
 
     private String getMemberEmail(final String authorization) {
         String accessToken = authorization.split(" ")[1];
-
         return tokenManager.getMemberEmail(accessToken);
     }
 
     @Transactional
-    public MemoryResponseDto.Update update(final Long id, final MemoryRequestDto.Update requestDto) {
+    public MemoryResponseDto.Update update(
+        final String authorization,
+        final Long id,
+        final MemoryRequestDto.Update requestDto
+    ) {
         String newContent = requestDto.getContent();
 
         Memory findMemory = memoryService.findById(id);
-        findMemory.updateContent(newContent);
+        validateMemory(authorization, findMemory);
 
+        findMemory.updateContent(newContent);
         return MemoryResponseDto.Update.from(findMemory);
     }
 
     @Transactional
-    public String delete(final Long id) {
+    public String delete(final String authorization,final Long id) {
         Memory findMemory = memoryService.findById(id);
-        memoryService.delete(findMemory);
+        validateMemory(authorization, findMemory);
 
+        memoryService.delete(findMemory);
         return "success";
+    }
+
+    private void validateMemory(String authorization, Memory memory) {
+        String email = getMemberEmail(authorization);
+        Member findMember = memory.getMember();
+
+        if (!email.equals(findMember.getEmail())) {
+            throw new BusinessException(NOT_VALID_MEMORY_BY_MEMBER);
+        }
     }
 
 }
