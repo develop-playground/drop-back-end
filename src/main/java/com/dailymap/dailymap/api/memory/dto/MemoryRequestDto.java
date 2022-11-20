@@ -9,23 +9,25 @@ import lombok.Getter;
 
 import java.util.List;
 
-@Getter
-@Builder
-public class MemoryRequestDto {
+public interface MemoryRequestDto {
 
-    private List<String> imageUrls;
+    @Getter
+    @Builder
+    class Register {
+        private List<String> imageUrls;
 
-    private String content;
+        private String content;
 
-    private Location location;
+        private Location location;
 
-    public Memory toEntity(Member member) {
-        return Memory.builder()
-            .content(content)
-            .imageUrls(imageUrls)
-            .location(location)
-            .member(member)
-            .build();
+        public Memory toEntity(Member member) {
+            return Memory.builder()
+                .content(content)
+                .imageUrls(imageUrls)
+                .location(location)
+                .member(member)
+                .build();
+        }
     }
 
 }

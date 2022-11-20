@@ -9,28 +9,32 @@ import lombok.Getter;
 
 import java.util.List;
 
-@Getter
-@Builder
-public class MemoryResponseDto {
+public interface MemoryResponseDto {
 
-    private Long id;
+    @Getter
+    @Builder
+    class Register {
+        private Long id;
 
-    private List<String> imageUrls;
+        private List<String> imageUrls;
 
-    private String content;
+        private String content;
 
-    private Location location;
+        private Location location;
 
-    private String createdDate;
+        private String createdDate;
 
-    public static MemoryResponseDto from(Memory memory) {
-        return MemoryResponseDto.builder()
-            .id(memory.getId())
-            .imageUrls(memory.getImageUrls())
-            .content(memory.getContent())
-            .location(memory.getLocation())
-            .createdDate(DateTimeUtils.convertToStringDateFormat(memory.getCreateTime()))
-            .build();
+        public static MemoryResponseDto.Register from(Memory memory) {
+            return MemoryResponseDto.Register.builder()
+                .id(memory.getId())
+                .imageUrls(memory.getImageUrls())
+                .content(memory.getContent())
+                .location(memory.getLocation())
+                .createdDate(DateTimeUtils.convertToStringDateFormat(memory.getCreateTime()))
+                .build();
+        }
     }
+
+
 
 }

@@ -28,14 +28,14 @@ public class MemoryApiService {
     private final MemoryRepository memoryRepository;
 
     @Transactional
-    public MemoryResponseDto save(final String authorization, final MemoryRequestDto requestDto) {
+    public MemoryResponseDto.Register save(final String authorization, final MemoryRequestDto.Register requestDto) {
         String email = getMemberEmail(authorization);
         Member findMember = getMemberByEmail(email);
 
         Memory memory = requestDto.toEntity(findMember);
         Memory savedMemory = memoryRepository.save(memory);
 
-        return MemoryResponseDto.from(savedMemory);
+        return MemoryResponseDto.Register.from(savedMemory);
     }
 
     private Member getMemberByEmail(final String email) {

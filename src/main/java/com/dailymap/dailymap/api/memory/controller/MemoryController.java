@@ -16,11 +16,11 @@ public class MemoryController {
     private final MemoryApiService memoryService;
 
     @PostMapping
-    public ResponseEntity<MemoryResponseDto> savedMemory(
+    public ResponseEntity<MemoryResponseDto.Register> savedMemory(
         @RequestHeader("Authorization")String authorization,
-        @RequestBody MemoryRequestDto requestDto
+        @RequestBody MemoryRequestDto.Register requestDto
     ) {
-        MemoryResponseDto responseDto = memoryService.save(authorization, requestDto);
+        MemoryResponseDto.Register responseDto = memoryService.save(authorization, requestDto);
         return ResponseEntity.ok(responseDto);
     }
 
