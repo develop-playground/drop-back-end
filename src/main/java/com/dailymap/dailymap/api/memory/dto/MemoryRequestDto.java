@@ -22,11 +22,14 @@ public interface MemoryRequestDto {
 
         private Location location;
 
+        private String address;
+
         public Memory toEntity(Member member) {
             return Memory.builder()
                 .content(content)
                 .imageUrls(imageUrls)
                 .location(location)
+                .address(address)
                 .member(member)
                 .build();
         }

@@ -20,6 +20,7 @@ public class MemoryService {
 
     private final MemoryRepository memoryRepository;
 
+    @Transactional
     public Memory save(final Memory memory) {
         return memoryRepository.save(memory);
     }

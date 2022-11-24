@@ -29,6 +29,8 @@ public class Memory extends BaseEntity {
     @Embedded
     private Location location = new Location();
 
+    private String address;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;

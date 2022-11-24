@@ -22,14 +22,17 @@ public interface MemoryResponseDto {
 
         private Location location;
 
+        private String address;
+
         private String createdDate;
 
         public static MemoryResponseDto.Register from(Memory memory) {
-            return MemoryResponseDto.Register.builder()
+            return Register.builder()
                 .id(memory.getId())
                 .imageUrls(memory.getImageUrls())
                 .content(memory.getContent())
                 .location(memory.getLocation())
+                .address(memory.getAddress())
                 .createdDate(DateTimeUtils.convertToStringDateFormat(memory.getCreateTime()))
                 .build();
         }
@@ -62,14 +65,17 @@ public interface MemoryResponseDto {
 
         private Location location;
 
+        private String address;
+
         private String createdDate;
 
         public static MemoryResponseDto.Find from(Memory memory) {
-            return MemoryResponseDto.Find.builder()
+            return Find.builder()
                 .id(memory.getId())
                 .imageUrls(memory.getImageUrls())
                 .content(memory.getContent())
                 .location(memory.getLocation())
+                .address(memory.getAddress())
                 .createdDate(DateTimeUtils.convertToStringDateFormat(memory.getCreateTime()))
                 .build();
         }
