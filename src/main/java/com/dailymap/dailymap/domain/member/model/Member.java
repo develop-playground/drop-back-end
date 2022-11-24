@@ -59,4 +59,8 @@ public class Member extends BaseEntity {
     public void expireRefreshToken() {
         this.tokenExpirationTime = LocalDateTime.now();
     }
+
+    public boolean isSameEmail(String authEmail) {
+        return email.equals(authEmail);
+    }
 }

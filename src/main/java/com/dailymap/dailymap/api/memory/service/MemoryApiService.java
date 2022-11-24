@@ -32,6 +32,8 @@ public class MemoryApiService {
 
     private final MemoryService memoryService;
 
+    private final String DELETE_SUCCESS_MESSAGE = "success";
+
     @Transactional
     public MemoryResponseDto.Register save(final String authorization, final MemoryRequestDto.Register requestDto) {
         String email = getMemberEmail(authorization);
@@ -52,6 +54,7 @@ public class MemoryApiService {
         String email = getMemberEmail(authorization);
         Member findMember = getMemberByEmail(email);
 
+        // todo : QueryDSL 사용하여 페이징 반영한 DTO List 반환되도록 리팩터링 시도하기
         List<Memory> memories = memoryService.findAllByMember(findMember, pageable);
 
         return memories.stream()
@@ -90,14 +93,14 @@ public class MemoryApiService {
         validateMemory(authorization, findMemory);
 
         memoryService.delete(findMemory);
-        return "success";
+        return DELETE_SUCCESS_MESSAGE;
     }
 
     private void validateMemory(String authorization, Memory memory) {
         String email = getMemberEmail(authorization);
         Member findMember = memory.getMember();
 
-        if (!email.equals(findMember.getEmail())) {
+        if (!findMember.isSameEmail(email)) {
             throw new BusinessException(NOT_VALID_MEMORY_BY_MEMBER);
         }
     }
