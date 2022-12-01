@@ -4,6 +4,7 @@ import com.dailymap.dailymap.api.login.dto.KakaoTokenResponseDto;
 import com.dailymap.dailymap.api.login.dto.LoginRequestDto;
 import com.dailymap.dailymap.api.login.service.KakaoLoginService;
 import com.dailymap.dailymap.domain.jwt.dto.TokenDto;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,7 @@ public class KakaoLoginController {
     @Value("${kakao.client.redirect-uri}")
     private String redirectUri;
 
+    @Operation(summary = "카카오 콜백", description = "카카오 측에서 호출하는 콜백 메서드", tags = "카카오 로그인", hidden = true)
     @GetMapping("/kakao/callback")
     public ResponseEntity<KakaoTokenResponseDto> loginCallback(String code) {
         KakaoTokenResponseDto kakaoToken = kakaoLoginService.getKakaoTokenDto(
@@ -37,6 +39,7 @@ public class KakaoLoginController {
         return ResponseEntity.ok(kakaoToken);
     }
 
+    @Operation(summary = "로그인", description = "카카오 액세스 토큰을 이용한 로그인", tags = "카카오 로그인")
     @PostMapping("/login")
     public ResponseEntity<TokenDto> login(
         @RequestHeader("Authorization") String authorization,
