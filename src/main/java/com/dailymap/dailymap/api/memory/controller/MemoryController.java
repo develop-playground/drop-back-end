@@ -5,6 +5,7 @@ import com.dailymap.dailymap.api.memory.dto.MemoryResponseDto;
 import com.dailymap.dailymap.api.memory.service.MemoryApiService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -67,7 +68,7 @@ public class MemoryController {
     @SecurityRequirement(name = "Bearer Authentication")
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteMemory(
-        @RequestHeader("Authorization") String authorization,
+        @Schema(hidden = true) @RequestHeader("Authorization") String authorization,
         @PathVariable final Long id
     ) {
         return ResponseEntity.ok(memoryService.delete(authorization,id));
