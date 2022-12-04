@@ -45,7 +45,7 @@ public class KakaoLoginController {
         return ResponseEntity.ok(kakaoToken);
     }
 
-    @Operation(summary = "로그인", description = "카카오 액세스 토큰을 이용한 로그인", tags = "카카오 로그인")
+    @Operation(summary = "로그인", description = "카카오에서 제공하는 액세스 토큰을 이용한 로그인", tags = "카카오 로그인")
     @SecurityRequirement(name = "Bearer Authentication")
     @PostMapping("/login")
     public ResponseEntity<TokenDto> login(

@@ -22,7 +22,7 @@ public class LogoutController {
 
     private final LogoutService logoutService;
 
-    @Operation(summary = "로그아웃", description = "로그아웃을 통한 리프레쉬 토큰 만료 처리", tags = "카카오 로그인")
+    @Operation(summary = "로그아웃", description = "로그아웃을 통한 리프레쉬 토큰 만료 처리", tags = "회원 정보")
     @PostMapping("/logout")
     public ResponseEntity<String> logout(
         @Schema(hidden = true) @RequestHeader("Authorization")String authorization
