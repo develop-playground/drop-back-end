@@ -1,8 +1,11 @@
 package com.dailymap.dailymap.global.error.exception;
 
+import lombok.Getter;
+
+@Getter
 public class BusinessException extends RuntimeException {
 
-    private int status;
+    private final int status;
 
     public BusinessException(int status, String message) {
         super(message);
