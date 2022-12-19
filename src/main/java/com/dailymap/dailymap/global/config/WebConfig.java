@@ -49,6 +49,8 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addMapping("/api/**")
             .allowedOrigins("*")
             .allowedMethods(
+                HttpMethod.HEAD.name(),
+                HttpMethod.OPTIONS.name(),
                 HttpMethod.GET.name(),
                 HttpMethod.POST.name(),
                 HttpMethod.PATCH.name(),
