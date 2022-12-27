@@ -36,7 +36,7 @@ public class Member extends BaseEntity {
     @Column(length = 250)
     private LocalDateTime tokenExpirationTime;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Memory> memories;
 
     public static Member of(String email, String name, MemberType memberType) {
