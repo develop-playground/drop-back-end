@@ -31,7 +31,7 @@ public class KakaoLoginController {
     @Value("${kakao.client.redirect-uri}")
     private String redirectUri;
 
-    @Operation(summary = "카카오 콜백", description = "카카오 측에서 호출하는 콜백 메서드", tags = "카카오 로그인", hidden = true)
+    @Operation(summary = "카카오 콜백", description = "카카오 측에서 호출하는 콜백 메서드", tags = "카카오 로그인", hidden = false)
     @GetMapping("/kakao/callback")
     public ResponseEntity<KakaoTokenResponseDto> loginCallback(String code) {
         KakaoTokenResponseDto kakaoToken = kakaoLoginService.getKakaoTokenDto(
