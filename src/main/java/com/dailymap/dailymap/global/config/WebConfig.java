@@ -50,16 +50,6 @@ public class WebConfig implements WebMvcConfigurer {
             .addMapping("/**")
             .allowedHeaders("*")
             .allowedOrigins("*")
-//            .allowedMethods(
-//                HttpMethod.GET.name(),
-//                HttpMethod.HEAD.name(),
-//                HttpMethod.POST.name(),
-//                HttpMethod.OPTIONS.name(),
-//                HttpMethod.PATCH.name(),
-//                HttpMethod.DELETE.name()
-//            )
-
-//            .allowedMethods("GET", "HEAD", "POST", "OPTIONS", "PATCH", "DELETE")
             .allowedMethods("*");
     }
 
